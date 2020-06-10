@@ -73,16 +73,22 @@ configure_domains() {
         certFile=/etc/letsencrypt/live/${domain}/fullchain.pem
         if [ -f $certFile ]
         then
-            if [ ${confFile##*.} = "missing" ]
+            ext=${confFile##*.}
+            echo "Extension = $ext"
+            if [ "$ext" = "missing" ]
             then
                 echo "Enabling ${domain}"
                 mv $confFile ${confFile%.*}
+            else
+                echo "Already enabled ${domain}"
             fi
         else
-            if [ ${confFile##*.} = "conf" ]
+            if [ "$ext" = "conf" ]
             then
                 echo "Disabling ${domain}"
                 mv ${confFile} "${confFile}.missing"
+            else
+                echo "Already disabled ${domain}"
             fi
         fi
     done
