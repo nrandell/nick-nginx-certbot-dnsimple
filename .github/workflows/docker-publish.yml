@@ -62,4 +62,4 @@ jobs:
             --platform linux/arm/v7,linux/amd64 \
             --file src/Dockerfile \
             --tag $IMAGE_ID:$VERSION \
-            --output "type=image,push=true" .
+            --output "type=image,push=true" src
